@@ -1,0 +1,19 @@
+worker_heartbeat_timeout: 300000
+
+logging:
+    level: info
+
+#metrics:
+#    type: log
+
+services:
+  - module: lib/index.js
+    entrypoint: apiServiceWorker
+    conf:
+        localsettings: ./lib/config/localSettings.js
+
+        # Use selective serialization (default false)
+        useSelser: true
+
+        # Allow override of port/interface:
+        serverPort: 8080

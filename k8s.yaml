@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: parsoid-redux
+  name: parsoid-redux
+  namespace: dev
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: parsoid-redux
+  type: ClusterIP
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: parsoid-redux
+  namespace: dev
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: parsoid-redux
+    spec:
+      containers:
+      - name: parsoid-redux
+        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.5
+        env:
+        - name: ENV
+          value: dev
+        - name: PARSOID_PORT
+          value: "8080"
+        resources:
+          limits:
+            memory: 1.4Gi
+          requests:
+            cpu: 500m
+            memory: 700Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: parsoid-redux
+  namespace: dev
+spec:
+  rules:
+  - host: dev.parsoid-redux.poz-dev.k8s.wikia.net
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: parsoid-redux
+          servicePort: 80

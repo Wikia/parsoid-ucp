@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global describe, it, beforeEach */
 
 'use strict';
 
@@ -6,26 +6,24 @@ require('chai').should();
 
 var WikiaApiMap = require('../../lib/config/WikiaApiMap');
 
-describe('WikiaApiMap', function () {
+describe('WikiaApiMap', function() {
 	var wikiaApiMap;
 
-	beforeEach(function () {
+	beforeEach(function() {
 		wikiaApiMap = new WikiaApiMap();
 	});
 
-	it('returns stored value if key exists in underlying map', function () {
+	it('returns stored value if key exists in underlying map', function() {
 		wikiaApiMap.apiMap.set('foo', 'bar');
 
 		wikiaApiMap.get('foo').should.equal('bar');
 	});
 
-	it('returns configuration if key does not exist but is valid URL', function () {
+	it('returns configuration if key does not exist but is valid URL', function() {
 		var testCases = [];
 
-		testCases.forEach(function (url) {
-			var config = wikiaApiMap.get(url);
+		testCases.forEach(function(url) {
 
-			config.should.be
 		});
 	});
 });

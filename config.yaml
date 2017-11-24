@@ -14,6 +14,3 @@ services:
 
         # Use selective serialization (default false)
         useSelser: true
-
-        # Allow override of port/interface:
-        serverPort: 8080

@@ -65,12 +65,15 @@ kind: Ingress
 metadata:
   name: parsoid-redux
   namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
   - host: dev.poz-dev.k8s.wikia.net
     http:
       paths:
-      - path:
+      - path: /parsoid-redux
         backend:
           serviceName: parsoid-redux
           servicePort: 80

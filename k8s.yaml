@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: parsoid-redux
-        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.5
+        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.6
         env:
         - name: ENV
           value: dev
@@ -67,7 +67,7 @@ metadata:
   namespace: dev
 spec:
   rules:
-  - host: dev.parsoid-redux.poz-dev.k8s.wikia.net
+  - host: dev.poz-dev.k8s.wikia.net
     http:
       paths:
       - path:

@@ -1,10 +1,10 @@
-FROM node:8
+FROM node:10.16.0-alpine
 
 # prepare build dir
 RUN mkdir -p /app
 
 # prepare limited user
-RUN useradd --no-create-home --home-dir /nonexistent --shell /bin/false parsoid
+RUN adduser -SH -g '' -h /nonexistent parsoid
 RUN chown -R parsoid /app
 
 WORKDIR /app

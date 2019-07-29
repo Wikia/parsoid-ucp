@@ -22,6 +22,9 @@ metadata:
   name: parsoid-redux
   namespace: dev
 spec:
+  selector:
+    matchLabels:
+      app: parsoid-redux
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -36,7 +39,7 @@ spec:
     spec:
       containers:
       - name: parsoid-redux
-        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.6
+        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.9
         env:
         - name: ENV
           value: dev

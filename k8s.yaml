@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: parsoid-redux
-        image: artifactory.wikia-inc.com/services/parsoid-redux:0.1.9
+        image: artifactory.wikia-inc.com/services/parsoid-redux:0.2.3
         env:
         - name: ENV
           value: dev

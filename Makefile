@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 DOCKER_IMAGE := artifactory.wikia-inc.com/services/parsoid-redux
-VERSION := 0.1.9
+VERSION := 0.2.3
 
 docker_build:
 	docker build -t ${DOCKER_IMAGE}:${VERSION} .

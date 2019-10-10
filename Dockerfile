@@ -1,4 +1,4 @@
-FROM node:10.16.0-alpine
+FROM node:10.16.3-alpine
 
 RUN apk add --no-cache git python make g++
 
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install --production
 
-FROM node:10.16.0-alpine
+FROM node:10.16.3-alpine
 
 EXPOSE 8080
 

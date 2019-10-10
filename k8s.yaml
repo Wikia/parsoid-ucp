@@ -3,28 +3,28 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: parsoid-redux
-  name: parsoid-redux
-  namespace: dev
+    app: unified-platform-parsoid
+  name: unified-platform-parsoid
+  namespace: ${env}
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    app: parsoid-redux
+    app: unified-platform-parsoid
   type: ClusterIP
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: parsoid-redux
-  namespace: dev
+  name: unified-platform-parsoid
+  namespace: ${env}
 spec:
   selector:
     matchLabels:
-      app: parsoid-redux
+      app: unified-platform-parsoid
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -35,14 +35,14 @@ spec:
   template:
     metadata:
       labels:
-        app: parsoid-redux
+        app: unified-platform-parsoid
     spec:
       containers:
-      - name: parsoid-redux
-        image: artifactory.wikia-inc.com/services/parsoid-redux:0.2.3
+      - name: unified-platform-parsoid
+        image: ${imageName}
         env:
         - name: ENV
-          value: dev
+          value: ${env}
         - name: PARSOID_PORT
           value: "8080"
         resources:
@@ -66,17 +66,17 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: parsoid-redux
-  namespace: dev
+  name: unified-platform-parsoid
+  namespace: ${env}
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: dev.poz-dev.k8s.wikia.net
+  - host: ${env}.${datacenter}.k8s.wikia.net
     http:
       paths:
-      - path: /parsoid-redux
+      - path: /unified-platform-parsoid
         backend:
-          serviceName: parsoid-redux
+          serviceName: unified-platform-parsoid
           servicePort: 80

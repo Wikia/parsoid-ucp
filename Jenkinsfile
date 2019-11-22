@@ -1,7 +1,7 @@
 import groovy.json.JsonOutput
 
 def namespace = "dev"
-def targets = ["sjc", "poz"]
+def targets = ["poz", "sjc"]
 // DEV slack channel as a default
 def slackChannel = "#services-deploy-dev"
 def isDevEnv = true
@@ -16,7 +16,7 @@ if (params.environment == "prod") {
 }
 
 def deployenv = 'artifactory.wikia-inc.com/platform/alpine:3.6-curl'
-def kubectl = 'artifactory.wikia-inc.com/ops/k8s-deployer:0.0.24'
+def kubectl = 'artifactory.wikia-inc.com/ops/k8s-deployer:0.0.25'
 
 node('docker-daemon'){
     def serviceVersion = "0.0.0"
@@ -36,7 +36,7 @@ node('docker-daemon'){
     }
 
     stage('Check if image already exists'){
-        serviceVersion = sh(script: "git describe --tags --long 2> /dev/null || echo v0.1.0", returnStdout: true).trim()
+        serviceVersion = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
         def status = sh(script: "curl -u ${env.JENKINS_ARTIFACTORY_USERNAME}:${env.JENKINS_ARTIFACTORY_PASSWORD}  -w \"%{http_code}\" -s -I -o /dev/null -XGET \"https://artifactory.wikia-inc.com/artifactory/api/storage/dockerv2-local/services/unified-platform-parsoid/${serviceVersion}\"", returnStdout: true).trim()
         if ( status == "200" ){
             println "Image ${imageName}:${serviceVersion} already exists"

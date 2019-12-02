@@ -1,4 +1,4 @@
-FROM node:10.16.3-alpine
+FROM node:10.17.0-alpine
 
 RUN apk add --no-cache git python make g++
 
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install --production
 
-FROM node:10.16.3-alpine
+FROM node:10.17.0-alpine
 
 EXPOSE 8080
 
@@ -22,11 +22,10 @@ COPY . /app
 WORKDIR /app
 
 # prepare limited user
-RUN adduser -SH -g '' -h /nonexistent parsoid
-RUN chown -R parsoid /app
+RUN chown -R 65534:65534 /app
 
 # do not run as root
-USER parsoid
+USER 65534
 
 ENV ENV "dev"
 

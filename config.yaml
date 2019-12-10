@@ -3,8 +3,10 @@ worker_heartbeat_timeout: 300000
 logging:
     level: info
 
-#metrics:
-#    type: log
+metrics:
+  type: statsd
+  host: localhost
+  port: 9125
 
 services:
   - module: lib/index.js

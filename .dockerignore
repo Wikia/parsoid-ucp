@@ -3,3 +3,6 @@ node_modules/
 tools/
 .jsduck/
 .idea/
+Jenkinsfile
+k8s.yaml
+

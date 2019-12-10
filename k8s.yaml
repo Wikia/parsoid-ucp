@@ -115,7 +115,7 @@ spec:
   endpoints:
     - port: metrics
       path: /metrics
-      interval: 10s
+      interval: 30s
 
 ---
 apiVersion: networking.k8s.io/v1beta1

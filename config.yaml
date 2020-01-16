@@ -16,3 +16,6 @@ services:
 
         # Use selective serialization (default false)
         useSelser: true
+        
+        # IW-2729: Use batch API interface for communicating with MediaWiki
+        useBatchAPI: true

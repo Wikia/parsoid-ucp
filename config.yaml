@@ -16,6 +16,11 @@ services:
 
         # Use selective serialization (default false)
         useSelser: true
-        
+
         # IW-2729: Use batch API interface for communicating with MediaWiki
         useBatchAPI: true
+
+        limits:
+          wt2html:
+            # IW-3041: Match Parsoid's max wikitext size to MediaWiki's $wgMaxArticleSize value - 2 MiB
+            maxWikitextSize: 2000000

@@ -1,0 +1,159 @@
+# Force the test runner to ensure the extension is loaded
+!! hooks
+mainpage-leftcolumn-start
+mainpage-rightcolumn-start
+mainpage-endcolumn
+!! endhooks
+
+!! test
+basic main page
+!! wikitext
+<mainpage-leftcolumn-start />
+==Left column==
+Lorem ipsum dolor.
+<div class="content">Foo</div>
+<mainpage-endcolumn />
+<mainpage-rightcolumn-start />
+==Right column==
+Baz
+<mainpage-endcolumn />
+!! html/parsoid
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid='{"dsr":[0,29,29,0]}' data-mw='{"name":"mainpage-leftcolumn-start","attrs":{}}'><div class="lcs-container" data-parsoid="{}">
+<h2 id="Left_column" data-parsoid='{"dsr":[30,47,2,2]}'>Left column</h2>
+<p data-parsoid='{"dsr":[48,66,0,0]}'>Lorem ipsum dolor.</p>
+<div class="content" data-parsoid='{"stx":"html","dsr":[67,97,21,6]}'>Foo</div>
+</div></div>
+<div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt9" data-parsoid='{"dsr":[121,151,30,0]}' data-mw='{"name":"mainpage-rightcolumn-start","attrs":{}}'><div class="rcs-container" data-parsoid="{}">
+<h2 id="Right_column" data-parsoid='{"dsr":[152,170,2,2]}'>Right column</h2>
+<p data-parsoid='{"dsr":[171,174,0,0]}'>Baz</p>
+</div></div>
+!! end
+
+!! test
+main page column with <nowiki>
+!! wikitext
+<mainpage-leftcolumn-start />
+Lorem ipsum<nowiki>'''Preserve me!'''</nowiki> dolor sit amet
+<mainpage-endcolumn />
+<mainpage-rightcolumn-start />
+Right column
+<mainpage-endcolumn />
+!! html/parsoid
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,29,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[30,93,0,0]}">Lorem ipsum<span typeof="mw:Nowiki" about="#mwt15" data-parsoid="{&quot;dsr&quot;:[42,77,8,9]}">'''Preserve me!'''</span> dolor sit amet</p>
+</div></div>
+<div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt11" data-parsoid="{&quot;dsr&quot;:[117,148,30,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-rightcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="rcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[149,163,0,0]}">Right column</p>
+</div></div>
+!! end
+
+!! test
+main page left column only
+!! wikitext
+<mainpage-leftcolumn-start />
+Only left column
+<mainpage-endcolumn />
+!! html/parsoid
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,29,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[30,48,0,0]}">Only left column</p>
+</div></div>
+!! end
+
+!! test
+main page right column before left column
+!! wikitext
+<mainpage-rightcolumn-start />
+Right column before left!
+<mainpage-endcolumn />
+<mainpage-leftcolumn-start />
+Left column after right!
+<mainpage-endcolumn />
+!! html/parsoid
+<div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,30,30,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-rightcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="rcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[31,58,0,0]}">Right column before left!</p>
+</div></div>
+<div class="main-page-tag-lcs main-page-tag-lcs-collapsed" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt9" data-parsoid="{&quot;dsr&quot;:[82,112,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[113,139,0,0]}">Left column after right!</p>
+</div></div>
+!! end
+
+!! test
+main page columns wrapped in custom HTML
+!! wikitext
+<div class="wrapper">
+<div class="foo">
+<mainpage-leftcolumn-start />
+Left column
+<mainpage-endcolumn />
+<mainpage-rightcolumn-start />
+Right column
+<mainpage-endcolumn />
+</div>
+</div>
+!! html/parsoid
+<div class="wrapper" data-parsoid="{&quot;stx&quot;:&quot;html&quot;,&quot;dsr&quot;:[0,194,21,6]}">
+<div class="foo" data-parsoid="{&quot;stx&quot;:&quot;html&quot;,&quot;dsr&quot;:[23,186,17,6]}">
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[42,71,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[72,85,0,0]}">Left column</p>
+</div></div>
+<div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt9" data-parsoid="{&quot;dsr&quot;:[109,140,30,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-rightcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="rcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[141,155,0,0]}">Right column</p>
+</div></div>
+</div>
+</div>
+!! end
+
+!! test
+main page column with unbalanced left column opening tag is normalized
+!! options
+# don't do wt2wt roundtripping since we normalize by inserting the missing closing tag
+parsoid=wt2html,html2html
+!! wikitext
+<mainpage-leftcolumn-start />
+Left column
+<mainpage-rightcolumn-start />
+Right column
+<mainpage-endcolumn />
+!! html
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,74,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[30,43,0,0]}">Left column</p>
+</div></div><div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt6" data-parsoid="{&quot;dsr&quot;:[44,112,30,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-rightcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="rcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[75,89,0,0]}">Right column</p>
+</div></div>
+!! end
+
+!! test
+main page column with unbalanced right column opening tag is normalized
+!! options
+# don't do wt2wt roundtripping since we normalize by inserting the missing closing tag
+parsoid=wt2html,html2html
+!! wikitext
+<mainpage-rightcolumn-start />
+Right column
+<mainpage-leftcolumn-start />
+Left column
+<mainpage-endcolumn />
+!! html
+<div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,75,30,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-rightcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="rcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[31,45,0,0]}">Right column</p>
+</div></div><div class="main-page-tag-lcs main-page-tag-lcs-collapsed" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt6" data-parsoid="{&quot;dsr&quot;:[46,112,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[76,89,0,0]}">Left column</p>
+</div></div>
+!! end
+
+!! test
+main page stray closing column tag is stripped
+!! options
+# don't do wt2wt roundtripping since we normalize by stripping the extraneous closing tag
+parsoid=wt2html,html2html
+!! wikitext
+<mainpage-leftcolumn-start />
+Left column
+<mainpage-endcolumn />
+
+<mainpage-endcolumn />
+!! html
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,66,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
+<p data-parsoid="{&quot;dsr&quot;:[30,43,0,0]}">Left column</p>
+</div></div>
+!! end

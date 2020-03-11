@@ -30,11 +30,11 @@ spec:
   selector:
     matchLabels:
       app: unified-platform-parsoid
-  replicas: 1
+  replicas: 4
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 50%
       maxUnavailable: 0
   minReadySeconds: 5
   template:
@@ -67,7 +67,7 @@ spec:
         ports:
         - containerPort: 8080
       - name: statsd-exporter
-        image: "prom/statsd-exporter:v0.13.0"
+        image: "prom/statsd-exporter:v0.15.0"
         resources:
           limits:
             cpu: 500m

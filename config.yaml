@@ -1,4 +1,5 @@
 worker_heartbeat_timeout: 300000
+num_workers: 4
 
 logging:
     level: info

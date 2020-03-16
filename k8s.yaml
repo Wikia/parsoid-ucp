@@ -12,10 +12,6 @@ spec:
     name: main
     protocol: TCP
     targetPort: 8080
-  - port: 9102
-    name: metrics
-    protocol: TCP
-    targetPort: 9102
   selector:
     app: unified-platform-parsoid
   type: ClusterIP
@@ -66,56 +62,6 @@ spec:
             port: 8080
         ports:
         - containerPort: 8080
-      - name: statsd-exporter
-        image: "prom/statsd-exporter:v0.15.0"
-        resources:
-          limits:
-            cpu: 500m
-            memory: 100Mi
-          requests:
-            cpu: 50m
-            memory: 50Mi
-        livenessProbe:
-          httpGet:
-            port: 9102
-            path: /metrics
-          initialDelaySeconds: 20
-          timeoutSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /metrics
-            port: 9102
-          timeoutSeconds: 3
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 65534
-        ports:
-          - containerPort: 9102
-          - containerPort: 9125
-            protocol: TCP
-          - containerPort: 9125
-            protocol: UDP
-
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: unified-platform-parsoid
-  labels:
-    app: unified-platform-parsoid
-  namespace: ${env}
-spec:
-  jobLabel: app
-  selector:
-    matchLabels:
-      app: unified-platform-parsoid
-  namespaceSelector:
-    matchNames:
-      - ${env}
-  endpoints:
-    - port: metrics
-      path: /metrics
-      interval: 30s
 
 ---
 apiVersion: networking.k8s.io/v1beta1

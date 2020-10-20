@@ -23,6 +23,8 @@ kind: Deployment
 metadata:
   name: unified-platform-parsoid
   namespace: ${env}
+  labels:
+    team: iwing
 spec:
   selector:
     matchLabels:

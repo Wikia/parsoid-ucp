@@ -4,6 +4,7 @@ kind: Service
 metadata:
   labels:
     app: unified-platform-parsoid
+    team: iwing
   name: unified-platform-parsoid
   namespace: ${env}
 spec:
@@ -22,6 +23,8 @@ kind: Deployment
 metadata:
   name: unified-platform-parsoid
   namespace: ${env}
+  labels:
+    team: iwing
 spec:
   selector:
     matchLabels:
@@ -37,6 +40,7 @@ spec:
     metadata:
       labels:
         app: unified-platform-parsoid
+        team: iwing
     spec:
       containers:
       - name: unified-platform-parsoid
@@ -69,6 +73,8 @@ kind: Ingress
 metadata:
   name: unified-platform-parsoid
   namespace: ${env}
+  labels:
+    team: iwing
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip

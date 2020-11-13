@@ -68,7 +68,7 @@ spec:
         - containerPort: 8080
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: unified-platform-parsoid
@@ -84,6 +84,7 @@ spec:
     http:
       paths:
       - path: /unified-platform-parsoid
+        pathType: Prefix
         backend:
           serviceName: unified-platform-parsoid
           servicePort: 80

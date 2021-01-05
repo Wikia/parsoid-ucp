@@ -16,7 +16,7 @@ if (params.environment == "prod") {
 }
 
 def deployenv = 'artifactory.wikia-inc.com/platform/alpine:3.6-curl'
-def kubectl = 'artifactory.wikia-inc.com/ops/k8s-deployer:0.0.25'
+def kubectl = 'artifactory.wikia-inc.com/ops/k8s-deployer:0.0.28'
 
 node('docker-daemon'){
     def serviceVersion = "0.0.0"

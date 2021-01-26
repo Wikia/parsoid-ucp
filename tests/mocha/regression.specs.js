@@ -232,7 +232,7 @@ describe('Regression Specs', function() {
 	// NOTE: This test assumes that the MediaWiki API doesn't return any
 	// trailing content after the <style> tag, namely a newline.
 	it('should not wrap templatestyles style tags in p-wrappers', function() {
-		var wt = "<templatestyles src='Template:Quote/styles.css'/><div>foo</div>";
+		var wt = "<templatestyles src='Template:Quote_box/styles.css'/><div>foo</div>";
 		return parse(wt).then(function(ret) {
 			return ret.doc.body.firstChild.nodeName.should.equal("STYLE");
 		});
@@ -240,7 +240,7 @@ describe('Regression Specs', function() {
 
 	// For https://phabricator.wikimedia.org/T208901
 	it('should not split p-wrappers around templatestyles', function() {
-		var wt = 'abc {{1x|<templatestyles src="Template:Quote/styles.css" /> def}} ghi [[File:Foo.jpg|thumb|250px]]';
+		var wt = 'abc {{1x|<templatestyles src="Template:Quote_box/styles.css" /> def}} ghi [[File:Foo.jpg|thumb|250px]]';
 		return parse(wt).then(function(ret) {
 			const body = ret.doc.body;
 			body.firstChild.nodeName.should.equal("P");
@@ -250,8 +250,8 @@ describe('Regression Specs', function() {
 
 	it('should deduplicate templatestyles style tags', function() {
 		var wt = [
-			'<templatestyles src="Template:Quote/styles.css" /><span>a</span>',
-			'<templatestyles src="Template:Quote/styles.css" /><span>b</span>'
+			'<templatestyles src="Template:Quote_box/styles.css" /><span>a</span>',
+			'<templatestyles src="Template:Quote_box/styles.css" /><span>b</span>'
 		].join('\n');
 		return parse(wt).then(function(ret) {
 			const { doc } = ret;

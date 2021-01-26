@@ -88,3 +88,37 @@ spec:
         backend:
           serviceName: unified-platform-parsoid
           servicePort: 80
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: ${env}
+    role: alert-rules
+    team: iwing
+  name: unified-platform-parsoid
+  namespace: ${env}
+spec:
+  groups:
+    - name: parsoid.rules
+      rules:
+        - alert: parsoid-health-check
+          expr: absent(kube_deployment_status_replicas_available{deployment="unified-platform-parsoid"} > 0)
+          labels:
+            severity: $severity
+            team: iwing
+            slack_channel: $slack_channel
+            pd: ${send_pd}
+          annotations:
+            description: Parsoid service is down
+            summary: Parsoid service has no healthy instances
+        - alert: parsoid-restart
+          annotations:
+            description: "Parsoid restarted ${'{{ $value | humanize }}'} times during last hour"
+          expr: sum(increase(kube_pod_container_status_restarts_total{container="unified-platform-parsoid"}[1h])) > 5
+          labels:
+            severity: warning
+            team: iwing
+            slack_channel: $slack_channel
+            pd: ${send_pd}

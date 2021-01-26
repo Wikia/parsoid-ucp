@@ -68,7 +68,15 @@ node('docker-daemon'){
 
             def parsoidConfiguration = readFile "k8s.yaml"
 
-            writeFile file: "parsoid-apply.yaml", text: ((new groovy.text.SimpleTemplateEngine().createTemplate(parsoidConfiguration)).make(['replicas':replicas,'env':params.environment,'imageName':imageName, 'datacenter': datacenter]).toString())
+            writeFile file: "parsoid-apply.yaml", text: ((new groovy.text.SimpleTemplateEngine().createTemplate(parsoidConfiguration)).make([
+                    'replicas':replicas,
+                    'env':params.environment,
+                    'imageName':imageName,
+                    'datacenter': datacenter,
+                    'severity': isDevEnv ? 'warning' : 'critical',
+                    'send_pd': !isDevEnv ? 'send' : '""',
+                    'slack_channel': 'cats-alerts'
+            ]).toString())
         }
 
         withDockerContainer(kubectl) {

@@ -29,7 +29,7 @@ spec:
   selector:
     matchLabels:
       app: unified-platform-parsoid
-  replicas: 4
+  replicas: $replicas
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -53,7 +53,7 @@ spec:
         resources:
           limits:
             cpu: 5
-            memory: 2.5Gi
+            memory: 3Gi
           requests:
             cpu: 1
             memory: 2Gi

@@ -121,4 +121,4 @@ spec:
             severity: warning
             team: iwing
             slack_channel: $slack_channel
-            pd: ${send_pd}
+            pd: ""

@@ -97,5 +97,8 @@
     "dependencies": {
       "_all": []
     }
+  },
+  "volta": {
+    "node": "10.24.0"
   }
 }

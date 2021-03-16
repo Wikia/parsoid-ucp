@@ -5,6 +5,31 @@ mainpage-rightcolumn-start
 mainpage-endcolumn
 !! endhooks
 
+!!article
+Template:Home
+!!text
+<mainpage-leftcolumn-start />
+Left column from the template.
+<div class="content">Foo</div>
+<mainpage-endcolumn />
+<mainpage-rightcolumn-start />
+Right column from the template.
+<mainpage-endcolumn />
+!!endarticle
+
+!!article
+Template:HomeWithOtherStuff
+!!text
+[[Category:Some category]]
+<mainpage-leftcolumn-start />
+Left column from the template.
+<div class="content">Foo</div>
+<mainpage-endcolumn />
+<mainpage-rightcolumn-start />
+Right column from the template.
+<mainpage-endcolumn />
+!!endarticle
+
 !! test
 basic main page
 !! wikitext
@@ -156,4 +181,33 @@ Left column
 <div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt3" data-parsoid="{&quot;dsr&quot;:[0,66,29,0]}" data-mw="{&quot;name&quot;:&quot;mainpage-leftcolumn-start&quot;,&quot;attrs&quot;:{}}"><div class="lcs-container" data-parsoid="{}">
 <p data-parsoid="{&quot;dsr&quot;:[30,43,0,0]}">Left column</p>
 </div></div>
+!! end
+
+!! test
+templated main page
+!! wikitext
+{{Home}}
+!! html/parsoid
+<div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start mw:Transclusion" about="#mwt1" data-parsoid='{"pi":[[]],"dsr":[0,8]}' data-mw='{"parts":[{"template":{"target":{"wt":"Home","href":"./Template:Home"},"params":{},"i":0}}]}'><div class="lcs-container" data-parsoid="{}"><span about="#mwt1" data-parsoid="{}">
+</span><p about="#mwt1" data-parsoid="{}">Left column from the template.</p><span about="#mwt1" data-parsoid="{}">
+</span><div class="content" about="#mwt1" data-parsoid='{"stx":"html"}'>Foo</div><span about="#mwt1" data-parsoid="{}">
+</span></div></div><span about="#mwt1">
+</span><div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt1" data-parsoid='{"src":"&lt;mainpage-rightcolumn-start />"}' data-mw='{"name":"mainpage-rightcolumn-start","attrs":{}}'><div class="rcs-container" data-parsoid="{}"><span about="#mwt1" data-parsoid="{}">
+</span><p about="#mwt1" data-parsoid="{}">Right column from the template.</p><span about="#mwt1" data-parsoid="{}">
+</span></div></div>
+!! end
+
+!! test
+templated main page with preceding template content
+!! wikitext
+{{HomeWithOtherStuff}}
+!! html/parsoid
+<link rel="mw:PageProp/Category" href="./Category:Some_category" about="#mwt1" typeof="mw:Transclusion" data-parsoid='{"stx":"simple","a":{"href":"./Category:Some_category"},"sa":{"href":"Category:Some category"},"dsr":[0,22,null,null],"pi":[[]]}' data-mw='{"parts":[{"template":{"target":{"wt":"HomeWithOtherStuff","href":"./Template:HomeWithOtherStuff"},"params":{},"i":0}}]}'/><span about="#mwt1">
+</span><div class="main-page-tag-lcs main-page-tag-lcs-exploded" typeof="mw:Extension/mainpage-leftcolumn-start" about="#mwt1" data-parsoid='{"src":"&lt;mainpage-leftcolumn-start />"}' data-mw='{"name":"mainpage-leftcolumn-start","attrs":{}}'><div class="lcs-container" data-parsoid="{}"><span about="#mwt1" data-parsoid="{}">
+</span><p about="#mwt1" data-parsoid="{}">Left column from the template.</p><span about="#mwt1" data-parsoid="{}">
+</span><div class="content" about="#mwt1" data-parsoid='{"stx":"html"}'>Foo</div><span about="#mwt1" data-parsoid="{}">
+</span></div></div><span about="#mwt1">
+</span><div class="main-page-tag-rcs" typeof="mw:Extension/mainpage-rightcolumn-start" about="#mwt1" data-parsoid='{"src":"&lt;mainpage-rightcolumn-start />"}' data-mw='{"name":"mainpage-rightcolumn-start","attrs":{}}'><div class="rcs-container" data-parsoid="{}"><span about="#mwt1" data-parsoid="{}">
+</span><p about="#mwt1" data-parsoid="{}">Right column from the template.</p><span about="#mwt1" data-parsoid="{}">
+</span></div></div>
 !! end

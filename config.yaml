@@ -21,6 +21,13 @@ services:
         # IW-2729: Use batch API interface for communicating with MediaWiki
         useBatchAPI: true
 
+        # Enable using compute workers to parse requests.
+        useWorker: true
+        # The number of workers in the pool spawned by each http worker
+        # to call out for parsing
+        # ceil(cpu request / `num_workers`) + 1
+        cpu_workers: 3
+
         limits:
           wt2html:
             # IW-3041: Match Parsoid's max wikitext size to MediaWiki's $wgMaxArticleSize value - 2 MiB

@@ -1,0 +1,129 @@
+# Force the test runner to ensure the extension is loaded
+!! hooks
+infobox
+!! endhooks
+
+!! article
+Template:PortableInfoboxSample
+!! text
+<infobox type="characteralt">
+	<title source="name"><default>Default</default></title>
+	<image source="image"/>
+	<header><center>Biographical information</center></header>
+	<data source="spoken"><label>spoken</label></data>
+	<data source="alias"><label>Aliases</label></data>
+	<data source="classification"><label>Species</label></data>
+	<data source="gender"><label>Gender</label></data>
+	<data source="age"><label>Age</label></data>
+	<header><center>Status</center></header>
+	<data source="status"><label>Status</label></data>
+	<data source="family"><label>Family</label></data>
+	<data source="occupation"><label>Occupation</label></data>
+	<data source="affiliations"><label>Affiliation</label></data>
+	<data source="allies"><label>Allies</label></data>
+</infobox>
+!! endarticle
+
+!! article
+Template:PortableInfoboxWrapped
+!! text
+<div class="conjoined-infoboxes" style="float: right; clear: none;">
+<infobox type="characteralt">
+	<title source="name"><default>Default</default></title>
+	<image source="image"/>
+	<header><center>Biographical information</center></header>
+	<data source="spoken"><label>spoken</label></data>
+	<data source="alias"><label>Aliases</label></data>
+	<data source="classification"><label>Species</label></data>
+	<data source="gender"><label>Gender</label></data>
+	<data source="age"><label>Age</label></data>
+	<header><center>Status</center></header>
+	<data source="status"><label>Status</label></data>
+	<data source="family"><label>Family</label></data>
+	<data source="occupation"><label>Occupation</label></data>
+	<data source="affiliations"><label>Affiliation</label></data>
+	<data source="allies"><label>Allies</label></data>
+</infobox>
+</div>
+!! endarticle
+
+!! article
+Template:PortableInfoboxWithCategory
+!! text
+[[Category:InfoboxCategory]]
+<infobox type="characteralt">
+	<title source="name"><default>Default</default></title>
+	<image source="image"/>
+	<header><center>Biographical information</center></header>
+	<data source="spoken"><label>spoken</label></data>
+	<data source="alias"><label>Aliases</label></data>
+	<data source="classification"><label>Species</label></data>
+	<data source="gender"><label>Gender</label></data>
+	<data source="age"><label>Age</label></data>
+	<header><center>Status</center></header>
+	<data source="status"><label>Status</label></data>
+	<data source="family"><label>Family</label></data>
+	<data source="occupation"><label>Occupation</label></data>
+	<data source="affiliations"><label>Affiliation</label></data>
+	<data source="allies"><label>Allies</label></data>
+</infobox>
+!! endarticle
+
+!! article
+Template:PortableInfoboxWrappedWithCategory
+!! text
+[[Category:InfoboxCategory]]
+<div class="conjoined-infoboxes" style="float: right; clear: none;">
+<infobox type="characteralt">
+	<title source="name"><default>Default</default></title>
+	<image source="image"/>
+	<header><center>Biographical information</center></header>
+	<data source="spoken"><label>spoken</label></data>
+	<data source="alias"><label>Aliases</label></data>
+	<data source="classification"><label>Species</label></data>
+	<data source="gender"><label>Gender</label></data>
+	<data source="age"><label>Age</label></data>
+	<header><center>Status</center></header>
+	<data source="status"><label>Status</label></data>
+	<data source="family"><label>Family</label></data>
+	<data source="occupation"><label>Occupation</label></data>
+	<data source="affiliations"><label>Affiliation</label></data>
+	<data source="allies"><label>Allies</label></data>
+</infobox>
+</div>
+!! endarticle
+
+!! test
+basic infobox transclusion
+!! wikitext
+{{PortableInfoboxSample|name=Foo|alias=Bar|status=Active}}
+!! html/parsoid
+<p class="mw-empty-elt" data-parsoid='{"autoInsertedEnd":true,"dsr":[0,0,0,0]}'></p><aside typeof="mw:Extension/infobox mw:Transclusion" about="#mwt1" data-parsoid='{"empty":true,"pi":[[{"k":"name","named":true},{"k":"alias","named":true},{"k":"status","named":true}]],"dsr":[0,58]}' data-mw='{"parts":[{"template":{"target":{"wt":"PortableInfoboxSample","href":"./Template:PortableInfoboxSample"},"params":{"name":{"wt":"Foo"},"alias":{"wt":"Bar"},"status":{"wt":"Active"}},"i":0}}]}'><aside class="portable-infobox" data-parsoid="{}">This is some mock portable infobox HTML from the server</aside></aside><p class="mw-empty-elt" data-parsoid='{"autoInsertedStart":true,"dsr":[58,58,0,0]}'></p>
+!! end
+
+!! test
+infobox wrapped in HTML tag (CATS-1086)
+!! wikitext
+{{PortableInfoboxWrapped|name=Foo|alias=Bar|status=Active}}
+!! html/parsoid
+<div class="conjoined-infoboxes" typeof="mw:Transclusion" data-mw='{"parts":[{"template":{"target":{"wt":"PortableInfoboxWrapped","href":"./Template:PortableInfoboxWrapped"},"params":{"name":{"wt":"Foo"},"alias":{"wt":"Bar"},"status":{"wt":"Active"}},"i":0}}]}'><aside typeof="mw:Extension/infobox" data-mw='{"name":"infobox","attrs":{"type":"characteralt"},"body":{"extsrc":"\n\t&lt;title source=\"name\">&lt;default>Default&lt;/default>&lt;/title>\n\t&lt;image source=\"image\"/>\n\t&lt;header>&lt;center>Biographical information&lt;/center>&lt;/header>\n\t&lt;data source=\"spoken\">&lt;label>spoken&lt;/label>&lt;/data>\n\t&lt;data source=\"alias\">&lt;label>Aliases&lt;/label>&lt;/data>\n\t&lt;data source=\"classification\">&lt;label>Species&lt;/label>&lt;/data>\n\t&lt;data source=\"gender\">&lt;label>Gender&lt;/label>&lt;/data>\n\t&lt;data source=\"age\">&lt;label>Age&lt;/label>&lt;/data>\n\t&lt;header>&lt;center>Status&lt;/center>&lt;/header>\n\t&lt;data source=\"status\">&lt;label>Status&lt;/label>&lt;/data>\n\t&lt;data source=\"family\">&lt;label>Family&lt;/label>&lt;/data>\n\t&lt;data source=\"occupation\">&lt;label>Occupation&lt;/label>&lt;/data>\n\t&lt;data source=\"affiliations\">&lt;label>Affiliation&lt;/label>&lt;/data>\n\t&lt;data source=\"allies\">&lt;label>Allies&lt;/label>&lt;/data>\n"}}'><aside class="portable-infobox">This is some mock portable infobox HTML from the server</aside></aside></div>
+!! end
+
+!! test
+infobox with category before infobox tag (CATS-270)
+!! wikitext
+{{PortableInfoboxWithCategory|name=Foo|alias=Bar|status=Active}}
+!! html/parsoid
+<link rel="mw:PageProp/Category" href="./Category:InfoboxCategory" about="#mwt1" typeof="mw:Transclusion" data-parsoid='{"stx":"simple","a":{"href":"./Category:InfoboxCategory"},"sa":{"href":"Category:InfoboxCategory"},"dsr":[0,64,null,null],"pi":[[{"k":"name","named":true},{"k":"alias","named":true},{"k":"status","named":true}]]}' data-mw='{"parts":[{"template":{"target":{"wt":"PortableInfoboxWithCategory","href":"./Template:PortableInfoboxWithCategory"},"params":{"name":{"wt":"Foo"},"alias":{"wt":"Bar"},"status":{"wt":"Active"}},"i":0}}]}'/><span about="#mwt1">
+</span><aside typeof="mw:Extension/infobox" about="#mwt1" data-parsoid='{"empty":true,"src":"&lt;infobox type=\"characteralt\">\n\t&lt;title source=\"name\">&lt;default>Default&lt;/default>&lt;/title>\n\t&lt;image source=\"image\"/>\n\t&lt;header>&lt;center>Biographical information&lt;/center>&lt;/header>\n\t&lt;data source=\"spoken\">&lt;label>spoken&lt;/label>&lt;/data>\n\t&lt;data source=\"alias\">&lt;label>Aliases&lt;/label>&lt;/data>\n\t&lt;data source=\"classification\">&lt;label>Species&lt;/label>&lt;/data>\n\t&lt;data source=\"gender\">&lt;label>Gender&lt;/label>&lt;/data>\n\t&lt;data source=\"age\">&lt;label>Age&lt;/label>&lt;/data>\n\t&lt;header>&lt;center>Status&lt;/center>&lt;/header>\n\t&lt;data source=\"status\">&lt;label>Status&lt;/label>&lt;/data>\n\t&lt;data source=\"family\">&lt;label>Family&lt;/label>&lt;/data>\n\t&lt;data source=\"occupation\">&lt;label>Occupation&lt;/label>&lt;/data>\n\t&lt;data source=\"affiliations\">&lt;label>Affiliation&lt;/label>&lt;/data>\n\t&lt;data source=\"allies\">&lt;label>Allies&lt;/label>&lt;/data>\n&lt;/infobox>"}' data-mw='{"name":"infobox","attrs":{"type":"characteralt"},"body":{"extsrc":"\n\t&lt;title source=\"name\">&lt;default>Default&lt;/default>&lt;/title>\n\t&lt;image source=\"image\"/>\n\t&lt;header>&lt;center>Biographical information&lt;/center>&lt;/header>\n\t&lt;data source=\"spoken\">&lt;label>spoken&lt;/label>&lt;/data>\n\t&lt;data source=\"alias\">&lt;label>Aliases&lt;/label>&lt;/data>\n\t&lt;data source=\"classification\">&lt;label>Species&lt;/label>&lt;/data>\n\t&lt;data source=\"gender\">&lt;label>Gender&lt;/label>&lt;/data>\n\t&lt;data source=\"age\">&lt;label>Age&lt;/label>&lt;/data>\n\t&lt;header>&lt;center>Status&lt;/center>&lt;/header>\n\t&lt;data source=\"status\">&lt;label>Status&lt;/label>&lt;/data>\n\t&lt;data source=\"family\">&lt;label>Family&lt;/label>&lt;/data>\n\t&lt;data source=\"occupation\">&lt;label>Occupation&lt;/label>&lt;/data>\n\t&lt;data source=\"affiliations\">&lt;label>Affiliation&lt;/label>&lt;/data>\n\t&lt;data source=\"allies\">&lt;label>Allies&lt;/label>&lt;/data>\n"}}'><aside class="portable-infobox" data-parsoid="{}">This is some mock portable infobox HTML from the server</aside></aside><p class="mw-empty-elt" data-parsoid='{"autoInsertedStart":true,"dsr":[64,64,0,0]}'></p>
+!! end
+
+!! test
+wrapped infobox with category before wrapper tag
+!! wikitext
+{{PortableInfoboxWrappedWithCategory|name=Foo|alias=Bar|status=Active}}
+!! html/parsoid
+<link rel="mw:PageProp/Category" href="./Category:InfoboxCategory" about="#mwt1" typeof="mw:Transclusion" data-parsoid='{"stx":"simple","a":{"href":"./Category:InfoboxCategory"},"sa":{"href":"Category:InfoboxCategory"},"dsr":[0,71,null,null],"pi":[[{"k":"name","named":true},{"k":"alias","named":true},{"k":"status","named":true}]]}' data-mw='{"parts":[{"template":{"target":{"wt":"PortableInfoboxWrappedWithCategory","href":"./Template:PortableInfoboxWrappedWithCategory"},"params":{"name":{"wt":"Foo"},"alias":{"wt":"Bar"},"status":{"wt":"Active"}},"i":0}}]}'/><span about="#mwt1">
+</span><div class="conjoined-infoboxes" style="float: right; clear: none;" about="#mwt1" data-parsoid='{"stx":"html"}'>
+<aside typeof="mw:Extension/infobox" about="#mwt4" data-parsoid='{"empty":true,"src":"&lt;infobox type=\"characteralt\">\n\t&lt;title source=\"name\">&lt;default>Default&lt;/default>&lt;/title>\n\t&lt;image source=\"image\"/>\n\t&lt;header>&lt;center>Biographical information&lt;/center>&lt;/header>\n\t&lt;data source=\"spoken\">&lt;label>spoken&lt;/label>&lt;/data>\n\t&lt;data source=\"alias\">&lt;label>Aliases&lt;/label>&lt;/data>\n\t&lt;data source=\"classification\">&lt;label>Species&lt;/label>&lt;/data>\n\t&lt;data source=\"gender\">&lt;label>Gender&lt;/label>&lt;/data>\n\t&lt;data source=\"age\">&lt;label>Age&lt;/label>&lt;/data>\n\t&lt;header>&lt;center>Status&lt;/center>&lt;/header>\n\t&lt;data source=\"status\">&lt;label>Status&lt;/label>&lt;/data>\n\t&lt;data source=\"family\">&lt;label>Family&lt;/label>&lt;/data>\n\t&lt;data source=\"occupation\">&lt;label>Occupation&lt;/label>&lt;/data>\n\t&lt;data source=\"affiliations\">&lt;label>Affiliation&lt;/label>&lt;/data>\n\t&lt;data source=\"allies\">&lt;label>Allies&lt;/label>&lt;/data>\n&lt;/infobox>"}' data-mw='{"name":"infobox","attrs":{"type":"characteralt"},"body":{"extsrc":"\n\t&lt;title source=\"name\">&lt;default>Default&lt;/default>&lt;/title>\n\t&lt;image source=\"image\"/>\n\t&lt;header>&lt;center>Biographical information&lt;/center>&lt;/header>\n\t&lt;data source=\"spoken\">&lt;label>spoken&lt;/label>&lt;/data>\n\t&lt;data source=\"alias\">&lt;label>Aliases&lt;/label>&lt;/data>\n\t&lt;data source=\"classification\">&lt;label>Species&lt;/label>&lt;/data>\n\t&lt;data source=\"gender\">&lt;label>Gender&lt;/label>&lt;/data>\n\t&lt;data source=\"age\">&lt;label>Age&lt;/label>&lt;/data>\n\t&lt;header>&lt;center>Status&lt;/center>&lt;/header>\n\t&lt;data source=\"status\">&lt;label>Status&lt;/label>&lt;/data>\n\t&lt;data source=\"family\">&lt;label>Family&lt;/label>&lt;/data>\n\t&lt;data source=\"occupation\">&lt;label>Occupation&lt;/label>&lt;/data>\n\t&lt;data source=\"affiliations\">&lt;label>Affiliation&lt;/label>&lt;/data>\n\t&lt;data source=\"allies\">&lt;label>Allies&lt;/label>&lt;/data>\n"}}'><aside class="portable-infobox" data-parsoid="{}">This is some mock portable infobox HTML from the server</aside></aside>
+!! end

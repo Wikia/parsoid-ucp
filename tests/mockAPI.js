@@ -570,6 +570,12 @@ var parse = function(text, onlypst, formatversion) {
 	if (onlypst) {
 		return fmt(text.replace(/\{\{subst:echo\|([^}]+)\}\}/, "$1"));
 	}
+
+	// Fandom change: Return mock HTML for use in portable infobox parsing tests
+	if (text.indexOf('{{PortableInfobox') !== -1) {
+		return fmt('<aside class="portable-infobox">This is some mock portable infobox HTML from the server</aside>');
+	}
+
 	// Render to html the contents of known extension tags
 	var match = text.match(/<([A-Za-z][^\t\n\v />\0]*)/);
 	switch ((match && match[1]) || '') {

@@ -15,6 +15,7 @@
     "express-handlebars": "^3.0.0",
     "finalhandler": "^1.1.1",
     "js-yaml": "^3.13.1",
+    "lru-cache": "^6.0.0",
     "mediawiki-title": "git+https://github.com/Wikia/mediawiki-title.git#v0.6.6",
     "negotiator": "git+https://github.com/arlolra/negotiator.git#full-parse-access",
     "pn": "^1.1.0",

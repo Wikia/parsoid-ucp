@@ -1,4 +1,4 @@
-FROM node:10.20.1-alpine
+FROM artifactory.wikia-inc.com/dockerhub/node:10.24.1-alpine
 
 RUN apk add --no-cache git python make g++
 
@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm ci --production
 
-FROM node:10.20.1-alpine
+FROM artifactory.wikia-inc.com/dockerhub/node:10.24.1-alpine
 
 EXPOSE 8080
 

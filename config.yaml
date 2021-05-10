@@ -28,6 +28,8 @@ services:
         # ceil(cpu request / `num_workers`) + 1
         cpu_workers: 3
 
+        maxConcurrentCalls: 8
+
         limits:
           wt2html:
             # IW-3041: Match Parsoid's max wikitext size to MediaWiki's $wgMaxArticleSize value - 2 MiB

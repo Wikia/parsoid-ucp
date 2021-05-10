@@ -55,7 +55,7 @@
   },
   "scripts": {
     "lint": "npm run dump-tokenizer && npm run eslint",
-    "start": "node --inspect node_modules/.bin/service-runner",
+    "start": "service-runner",
     "eslint": "eslint bin lib tests tools core-upgrade.js",
     "eslint-fix": "eslint --fix bin lib tests tools core-upgrade.js",
     "dump-tokenizer": "npm run dump-tokenizer-source && npm run dump-tokenizer-rules",

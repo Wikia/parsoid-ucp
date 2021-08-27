@@ -69,7 +69,7 @@ spec:
         - containerPort: 8080
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: unified-platform-parsoid
@@ -77,17 +77,19 @@ metadata:
   labels:
     team: iwing
   annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
+    kubernetes.io/ingress.class: external-lb-a
 spec:
   rules:
-  - host: ${env}.${datacenter}.k8s.wikia.net
+  - host: parsoid.a.${datacenter}.k8s.wikia.net
     http:
       paths:
-      - path: /unified-platform-parsoid
+      - path: /
+        pathType: Prefix
         backend:
-          serviceName: unified-platform-parsoid
-          servicePort: 80
+          service:
+            name: unified-platform-parsoid
+            port:
+              number: 80
 
 ---
 apiVersion: monitoring.coreos.com/v1

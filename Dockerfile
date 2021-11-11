@@ -1,6 +1,6 @@
-FROM artifactory.wikia-inc.com/dockerhub/node:10.24.1-alpine
+FROM artifactory.wikia-inc.com/dockerhub/node:16.13.0-alpine AS builder
 
-RUN apk add --no-cache git python make g++
+RUN apk add --no-cache git python3 make g++
 
 # prepare build dir
 RUN mkdir -p /app
@@ -11,18 +11,16 @@ WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm ci --production
 
-FROM artifactory.wikia-inc.com/dockerhub/node:10.24.1-alpine
+COPY . /app
+
+FROM artifactory.wikia-inc.com/dockerhub/node:16.13.0-alpine
 
 EXPOSE 8080
 
 # copy the sources and run the server
-COPY --from=0 /app /app
-COPY . /app
+COPY --from=builder --chown=65534:65534 /app /app
 
 WORKDIR /app
-
-# prepare limited user
-RUN chown -R 65534:65534 /app
 
 # do not run as root
 USER 65534

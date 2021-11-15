@@ -7,7 +7,7 @@
     "babybird": "^0.0.1",
     "compression": "^1.7.2",
     "connect-busboy": "^0.0.2",
-    "content-type": "git+https://github.com/wikimedia/content-type.git#master",
+    "content-type": "git+https://git@github.com/wikimedia/content-type.git#master",
     "core-js": "^2.5.6",
     "domino": "^2.1.0",
     "entities": "^1.1.1",
@@ -16,8 +16,8 @@
     "finalhandler": "^1.1.1",
     "js-yaml": "^3.13.1",
     "lru-cache": "^6.0.0",
-    "mediawiki-title": "git+https://github.com/Wikia/mediawiki-title.git#v0.6.6",
-    "negotiator": "git+https://github.com/arlolra/negotiator.git#full-parse-access",
+    "mediawiki-title": "git+https://git@github.com/Wikia/mediawiki-title.git#v0.6.6",
+    "negotiator": "git+https://git@github.com/arlolra/negotiator.git#full-parse-access",
     "pn": "^1.1.0",
     "prfun": "^2.1.5",
     "request": "^2.86.0",
@@ -26,7 +26,7 @@
     "service-runner": "^2.6.19",
     "simplediff": "^0.1.1",
     "uuid": "^3.2.1",
-    "wikimedia-langconv": "git+https://github.com/wikimedia/mediawiki-libs-LangConv.git#master",
+    "wikimedia-langconv": "git+https://git@github.com/wikimedia/mediawiki-libs-LangConv.git#master",
     "wikipeg": "^2.0.3",
     "worker-farm": "^1.7.0",
     "yargs": "^13.2.4"
@@ -42,7 +42,7 @@
     "eslint-plugin-jsdoc": "^3.6.3",
     "eslint-plugin-json": "^1.2.0",
     "istanbul": "^0.4.5",
-    "js2php": "git+https://github.com/cscott/js2php.git#c4e4b1d30546e5346448a145cd7e0ff1145e0d4a",
+    "js2php": "git+https://git@github.com/cscott/js2php.git#c4e4b1d30546e5346448a145cd7e0ff1145e0d4a",
     "jsdoc": "^3.5.5",
     "jsdoc-wmf-theme": "0.0.3",
     "mocha": "^5.1.1",
@@ -100,6 +100,6 @@
     }
   },
   "volta": {
-    "node": "10.24.0"
+    "node": "16.13.0"
   }
 }

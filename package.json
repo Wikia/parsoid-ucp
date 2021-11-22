@@ -23,7 +23,7 @@
     "request": "^2.86.0",
     "semver": "^6.1.0",
     "serve-favicon": "^2.5.0",
-    "service-runner": "^2.6.19",
+    "service-runner": "^3.0.0",
     "simplediff": "^0.1.1",
     "uuid": "^3.2.1",
     "wikimedia-langconv": "git+https://git@github.com/wikimedia/mediawiki-libs-LangConv.git#master",

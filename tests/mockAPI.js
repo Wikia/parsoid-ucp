@@ -939,6 +939,10 @@ const start = function(options) {
 		logger.log('info', 'Mock MediaWiki API: Started on ' + port);
 		return {
 			close: function() {
+				// Avoid races on service-runner shutdown
+				if (!server.listening) {
+					return Promise.resolve();
+				}
 				return Promise.promisify(server.close, false, server)();
 			},
 			port: port,

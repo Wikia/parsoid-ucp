@@ -5,9 +5,8 @@ logging:
     level: info
 
 metrics:
-  type: statsd
-  host: localhost
-  port: 9125
+  - type: prometheus
+    port: 8081
 
 services:
   - module: lib/index.js

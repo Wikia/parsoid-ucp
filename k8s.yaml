@@ -104,6 +104,7 @@ metadata:
   name: unified-platform-parsoid
   labels:
     app: unified-platform-parsoid
+    team: iwing
   namespace: ${env}
 spec:
   jobLabel: app

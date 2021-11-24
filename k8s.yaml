@@ -13,6 +13,10 @@ spec:
     name: main
     protocol: TCP
     targetPort: 8080
+  - port: 8081
+    name: metrics
+    protocol: TCP
+    targetPort: 8081
   selector:
     app: unified-platform-parsoid
   type: ClusterIP
@@ -67,6 +71,8 @@ spec:
             port: 8080
         ports:
         - containerPort: 8080
+        - containerPort: 8081
+          name: metrics
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -90,6 +96,27 @@ spec:
             name: unified-platform-parsoid
             port:
               number: 80
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: unified-platform-parsoid
+  labels:
+    app: unified-platform-parsoid
+  namespace: ${env}
+spec:
+  jobLabel: app
+  selector:
+    matchLabels:
+      app: unified-platform-parsoid
+  namespaceSelector:
+    matchNames:
+      - ${env}
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s
 
 ---
 apiVersion: monitoring.coreos.com/v1

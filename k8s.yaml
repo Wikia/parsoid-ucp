@@ -49,11 +49,24 @@ spec:
       containers:
       - name: unified-platform-parsoid
         image: ${imageName}
+        command:
+        - node
+        - --max-heap-size=${'$(MAX_HEAP_SIZE)'}
+        - node_modules/.bin/service-runner
         env:
         - name: ENV
           value: ${env}
         - name: PARSOID_PORT
           value: "8080"
+        # Certain articles with pathological wikitext inputs such as https://mobile-legends.fandom.com/wiki/List_of_Heroes
+        # may require 2+ GiB of memory during tokenization. The default v8 heap size considers cgroup limits but maxes out at 2GiB,
+        # so make sure that we have a large enough heap for all workloads (CATS-2054)
+        - name: MAX_HEAP_SIZE
+          valueFrom:
+            resourceFieldRef:
+              containerName: unified-platform-parsoid
+              resource: requests.memory
+              divisor: 1Mi
         resources:
           limits:
             cpu: 5

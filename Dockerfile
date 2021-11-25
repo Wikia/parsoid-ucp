@@ -9,7 +9,7 @@ WORKDIR /app
 
 # install npm packages
 COPY package.json package-lock.json /app/
-RUN npm ci --production
+RUN npm ci --production --no-optional
 
 COPY . /app
 

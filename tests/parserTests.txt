@@ -9508,6 +9508,7 @@ some text
 #redirect [[Main Page]]
 !! html/parsoid
 <p>some text</p>
+
 <ol data-parsoid='{}'><li data-parsoid='{}'>redirect <a rel="mw:WikiLink" href="./Main_Page" title="Main Page" data-parsoid='{"stx":"simple","a":{"href":"./Main_Page"},"sa":{"href":"Main Page"}}'>Main Page</a></li></ol>
 !! end
 
@@ -32824,7 +32825,6 @@ header
 header
 *foo
 *bar
-
 footer
 !! end
 
@@ -32876,7 +32876,6 @@ footer
 !! wikitext/edited
 {|
 |
-
 *foo
 *bar
 footer

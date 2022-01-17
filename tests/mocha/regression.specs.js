@@ -75,6 +75,7 @@ describe('Regression Specs', function() {
 			"* <!--cmt--> item",
 			"* <div>item</div>",
 			"* [[Link|item]]",
+			"* wrap",
 			"== heading ==",
 			"== <!--cmt--> heading ==",
 			"== <div>heading</div> ==",
@@ -92,7 +93,11 @@ describe('Regression Specs', function() {
 			const { doc: result, env } = ret;
 
 			var origDOM = result.body;
-			var editedHTML = origDOM.innerHTML.replace(/item/g, 'edited item').replace(/heading/g, 'edited heading').replace(/cell/g, 'edited cell');
+			var editedHTML = origDOM.innerHTML
+				.replace(/item/g, 'edited item')
+				.replace(/heading/g, 'edited heading')
+				.replace(/cell/g, 'edited cell')
+				.replace(/wrap/g, '<span>wrap</span>');
 
 			// Without selser, we should see normalized wikitext
 
@@ -103,7 +108,7 @@ describe('Regression Specs', function() {
 					"*<!--cmt-->edited item",
 					"*<div>edited item</div>",
 					"*[[Link|edited item]]",
-					"",
+					"*<span>wrap</span>",
 					"==edited heading==",
 					"==<!--cmt-->edited heading==",
 					"==<div>edited heading</div>==",
@@ -131,6 +136,7 @@ describe('Regression Specs', function() {
 						"* <!--cmt-->edited item",
 						"* <div>edited item</div>",
 						"* [[Link|edited item]]",
+						"* <span>wrap</span>",
 						"== edited heading ==",
 						"== <!--cmt-->edited heading ==",
 						"== <div>edited heading</div> ==",

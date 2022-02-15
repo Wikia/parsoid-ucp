@@ -74,8 +74,7 @@ node('docker-daemon'){
                     'imageName':imageName,
                     'datacenter': datacenter,
                     'severity': isDevEnv ? 'warning' : 'critical',
-                    'send_pd': !isDevEnv ? 'send' : '""',
-                    'slack_channel': 'cats-alerts'
+                    'send_pd': !isDevEnv ? 'send' : '""'
             ]).toString())
         }
 

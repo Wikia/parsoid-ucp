@@ -64,7 +64,7 @@ node('docker-daemon'){
         imageName = "artifactory.wikia-inc.com/services/unified-platform-parsoid:${serviceVersion}"
 
         stage('Generate Descriptors'){
-            def replicas = isDevEnv ? 1 : 10
+            def replicas = isDevEnv ? 1 : 2
 
             def parsoidConfiguration = readFile "k8s.yaml"
 

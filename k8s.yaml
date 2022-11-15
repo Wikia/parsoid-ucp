@@ -33,7 +33,7 @@ spec:
   selector:
     matchLabels:
       app: unified-platform-parsoid
-    replicas: $replicas
+  replicas: $replicas
   strategy:
     type: RollingUpdate
     rollingUpdate:
